@@ -38,6 +38,36 @@ main {
     padding: 0 1rem;
 }
 
+/* Controls */
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 0.75rem;
+}
+
+#controls button {
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #eee;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#controls button.active {
+    background-color: #667eea;
+    color: white;
+}
+
+#controls button:hover {
+    background-color: #764ba2;
+    color: white;
+}
+
 /* Recipe Container - Flexbox Grid */
 #recipe-container {
     display: flex;
