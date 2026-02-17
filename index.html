@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RecipeJS - Your Functional Cooking Companion</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecipeJS - Functional Cooking Companion</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>🍳 RecipeJS</h1>
-        <p>Your Functional Cooking Companion</p>
-    </header>
 
-    <main>
-        <div id="controls">
-  <div id="filters">
-    <button data-filter="all" class="active">Show All</button>
-    <button data-filter="easy">Easy</button>
-    <button data-filter="medium">Medium</button>
-    <button data-filter="hard">Hard</button>
-    <button data-filter="quick">Quick Recipes</button>
+<header>
+  <h1>RecipeJS - Functional Cooking Companion</h1>
+  <p>Filter, sort, and explore recipes with steps and ingredients!</p>
+</header>
+
+<main>
+  <!-- Filters and Sorts -->
+  <div class="controls">
+    <div class="filters">
+      <button data-filter="all" class="active">All</button>
+      <button data-filter="easy">Easy</button>
+      <button data-filter="medium">Medium</button>
+      <button data-filter="hard">Hard</button>
+      <button data-filter="quick">Quick (≤30min)</button>
+    </div>
+    <div class="sorts">
+      <button data-sort="none" class="active">Default</button>
+      <button data-sort="name">Sort by Name</button>
+      <button data-sort="time">Sort by Time</button>
+    </div>
   </div>
 
-  <div id="sorts">
-    <button data-sort="none" class="active">Default Order</button>
-    <button data-sort="name">Name (A-Z)</button>
-    <button data-sort="time">Time (Fastest First)</button>
-  </div>
-</div>
+  <!-- Recipe Cards Container -->
+  <div id="recipe-container"></div>
+</main>
 
-        <div id="recipe-container">
-        </div>
-    </main>
-
-    <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
+
