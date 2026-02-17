@@ -9,28 +9,24 @@
 <body>
   <header>
     <h1>RecipeJS</h1>
-    <p>Functional Cooking Companion</p>
-    <input type="text" id="search-input" placeholder="Search recipes..." />
-    <button id="clear-search">Clear</button>
+    <div class="controls">
+      <input type="text" id="search-input" placeholder="Search recipes..." />
+      <button id="clear-search" hidden>Clear</button>
+      <div class="filter-buttons">
+        <button data-filter="all" class="filter-btn active">All</button>
+        <button data-filter="favorites" class="filter-btn">Favorites</button>
+        <!-- Add other filter buttons here -->
+      </div>
+      <div class="sort-buttons">
+        <button data-sort="name" class="sort-btn">Sort by Name</button>
+        <button data-sort="time" class="sort-btn">Sort by Time</button>
+      </div>
+    </div>
+    <div id="recipe-counter">Showing 0 of 0 recipes</div>
   </header>
 
   <main>
-    <div class="controls">
-      <div class="filter-buttons">
-        <button data-filter="all" class="active">All</button>
-        <button data-filter="easy">Easy</button>
-        <button data-filter="medium">Medium</button>
-        <button data-filter="hard">Hard</button>
-        <button data-filter="favorites">Favorites Only</button>
-      </div>
-      <div class="sort-buttons">
-        <button data-sort="time">Sort by Time</button>
-        <button data-sort="title">Sort by Title</button>
-      </div>
-    </div>
-
-    <p id="recipe-counter"></p>
-    <div id="recipe-container"></div>
+    <div id="recipe-container" class="recipe-container"></div>
   </main>
 
   <script src="app.js"></script>
