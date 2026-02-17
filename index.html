@@ -10,25 +10,34 @@
   <header>
     <h1>RecipeJS</h1>
     <div class="controls">
+      <!-- Search -->
       <input type="text" id="search-input" placeholder="Search recipes..." />
       <button id="clear-search" hidden>Clear</button>
+
+      <!-- Filter buttons -->
       <div class="filter-buttons">
         <button data-filter="all" class="filter-btn active">All</button>
         <button data-filter="favorites" class="filter-btn">Favorites</button>
-        <!-- Add other filter buttons here -->
+        <!-- Add more filter buttons here if needed -->
       </div>
+
+      <!-- Sort buttons -->
       <div class="sort-buttons">
         <button data-sort="name" class="sort-btn">Sort by Name</button>
         <button data-sort="time" class="sort-btn">Sort by Time</button>
       </div>
     </div>
+
+    <!-- Recipe counter -->
     <div id="recipe-counter">Showing 0 of 0 recipes</div>
   </header>
 
   <main>
+    <!-- Recipe cards container -->
     <div id="recipe-container" class="recipe-container"></div>
   </main>
 
+  <!-- Link to external JS -->
   <script src="app.js"></script>
 </body>
 </html>

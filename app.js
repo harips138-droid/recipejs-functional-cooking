@@ -1,7 +1,5 @@
 (() => {
-  // --------------------------
-  // State
-  // --------------------------
+ 
   const state = {
     recipes: [
       {
@@ -19,6 +17,14 @@
         ingredients: ["flour", "milk", "egg", "sugar"],
         steps: ["Mix ingredients", "Cook on skillet"],
         time: 15
+      },
+      {
+        id: 3,
+        title: "Caesar Salad",
+        description: "Fresh salad with creamy dressing",
+        ingredients: ["lettuce", "croutons", "parmesan", "dressing"],
+        steps: ["Chop lettuce", "Add toppings", "Drizzle dressing"],
+        time: 10
       }
       // Add more recipes here
     ],
@@ -55,6 +61,13 @@
 
   const isFavorited = (id) => state.favorites.includes(id);
 
+  const highlightMatch = (text) => {
+    const query = state.searchQuery.trim();
+    if (!query) return text;
+    const regex = new RegExp(`(${query})`, "gi");
+    return text.replace(regex, '<mark>$1</mark>');
+  };
+
   // --------------------------
   // Rendering Functions
   // --------------------------
@@ -62,18 +75,20 @@
     const card = document.createElement("div");
     card.className = "recipe-card";
 
+    const favHeart = isFavorited(recipe.id) ? "❤️" : "🤍";
+
     card.innerHTML = `
-      <h3>${recipe.title}</h3>
-      <p>${recipe.description}</p>
+      <h3>${highlightMatch(recipe.title)}</h3>
+      <p>${highlightMatch(recipe.description)}</p>
       <div class="recipe-ingredients">
         <strong>Ingredients:</strong>
-        <ul>${recipe.ingredients.map(i => `<li>${i}</li>`).join("")}</ul>
+        <ul>${recipe.ingredients.map(i => `<li>${highlightMatch(i)}</li>`).join("")}</ul>
       </div>
       <div class="recipe-steps">
         <strong>Steps:</strong>
-        <ol>${recipe.steps.map(s => `<li>${s}</li>`).join("")}</ol>
+        <ol>${recipe.steps.map(s => `<li>${highlightMatch(s)}</li>`).join("")}</ol>
       </div>
-      <button class="favorite-btn ${isFavorited(recipe.id) ? "favorited" : ""}" data-recipe-id="${recipe.id}">♥</button>
+      <button class="favorite-btn" data-recipe-id="${recipe.id}">${favHeart}</button>
     `;
     return card;
   };
@@ -114,9 +129,7 @@
     visibleRecipes = applySort(visibleRecipes);
 
     recipeContainer.innerHTML = "";
-    visibleRecipes.forEach(recipe => {
-      recipeContainer.appendChild(createRecipeCard(recipe));
-    });
+    visibleRecipes.forEach(recipe => recipeContainer.appendChild(createRecipeCard(recipe)));
 
     updateCounter(visibleRecipes.length, state.recipes.length);
   };
@@ -126,14 +139,14 @@
   // --------------------------
   const handleSearch = debounce(() => {
     state.searchQuery = searchInput.value;
-    clearSearchBtn.hidden = !state.searchQuery;
+    clearSearchBtn.classList.toggle("show", !!state.searchQuery);
     updateDisplay();
   }, 300);
 
   const handleClearSearch = () => {
     searchInput.value = "";
     state.searchQuery = "";
-    clearSearchBtn.hidden = true;
+    clearSearchBtn.classList.remove("show");
     updateDisplay();
   };
 
@@ -146,13 +159,14 @@
   };
 
   const handleFilterClick = (filter) => {
-    state.activeFilter = filter;
-    filterButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.filter === filter));
+    state.activeFilter = state.activeFilter === filter ? "all" : filter;
+    filterButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.filter === state.activeFilter));
     updateDisplay();
   };
 
   const handleSortClick = (sortType) => {
     state.sortType = sortType;
+    sortButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.sort === sortType));
     updateDisplay();
   };
 
@@ -169,13 +183,8 @@
       }
     });
 
-    filterButtons.forEach(btn => {
-      btn.addEventListener("click", () => handleFilterClick(btn.dataset.filter));
-    });
-
-    sortButtons.forEach(btn => {
-      btn.addEventListener("click", () => handleSortClick(btn.dataset.sort));
-    });
+    filterButtons.forEach(btn => btn.addEventListener("click", () => handleFilterClick(btn.dataset.filter)));
+    sortButtons.forEach(btn => btn.addEventListener("click", () => handleSortClick(btn.dataset.sort)));
   };
 
   // --------------------------
