@@ -7,34 +7,32 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header>
+    <h1>RecipeJS</h1>
+    <p>Functional Cooking Companion</p>
+    <input type="text" id="search-input" placeholder="Search recipes..." />
+    <button id="clear-search">Clear</button>
+  </header>
 
-<header>
-  <h1>RecipeJS - Functional Cooking Companion</h1>
-  <p>Filter, sort, and explore recipes with steps and ingredients!</p>
-</header>
-
-<main>
-  <!-- Filters and Sorts -->
-  <div class="controls">
-    <div class="filters">
-      <button data-filter="all" class="active">All</button>
-      <button data-filter="easy">Easy</button>
-      <button data-filter="medium">Medium</button>
-      <button data-filter="hard">Hard</button>
-      <button data-filter="quick">Quick (≤30min)</button>
+  <main>
+    <div class="controls">
+      <div class="filter-buttons">
+        <button data-filter="all" class="active">All</button>
+        <button data-filter="easy">Easy</button>
+        <button data-filter="medium">Medium</button>
+        <button data-filter="hard">Hard</button>
+        <button data-filter="favorites">Favorites Only</button>
+      </div>
+      <div class="sort-buttons">
+        <button data-sort="time">Sort by Time</button>
+        <button data-sort="title">Sort by Title</button>
+      </div>
     </div>
-    <div class="sorts">
-      <button data-sort="none" class="active">Default</button>
-      <button data-sort="name">Sort by Name</button>
-      <button data-sort="time">Sort by Time</button>
-    </div>
-  </div>
 
-  <!-- Recipe Cards Container -->
-  <div id="recipe-container"></div>
-</main>
+    <p id="recipe-counter"></p>
+    <div id="recipe-container"></div>
+  </main>
 
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
-
